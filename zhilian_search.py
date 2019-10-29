@@ -1,13 +1,12 @@
 '''
-1.首先分析网页的请求响应：https://sou.zhaopin.com/?jl=763&kw=%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90&kt=3。
-  数据的位置：是在https://fe-api.zhaopin.com/c/i/sou?中，是一个异步请求。
-2.构建请求头。
-3.发起响应，获得json。
-4.解析json。
-5.保存到数据库。
+1. 首先，访问智联招聘网站的搜索页，查看请求和响应。
+   可以看到职位的相关数据在https://fe-api.zhaopin.com/c/i/sou?中，是一个异步请求。
+2. 构造请求体：设置UA、x-requested-with等等参数。
+3. 访问网页并获得json：使用get函数发起访问，获取响应的json。
+4. 解析json：按照需要的字段，解析json。
+5. 保存数据：把数据保存到MongoDB数据库中。
 
 '''
-
 
 import requests
 import time
@@ -42,8 +41,8 @@ def get_one_page(page=1, cityId=763, search_keywords='数据分析'):
         'kw': search_keywords,
         'kt': 3,
         '_v': '0.00882343',
-        'x-zp-page-request-id': '2275381cb6bf46c9a719bdbc7fca9ff0-1572342384239-996098',
-        'x-zp-client-id': '7fb87906-040b-43cb-a4d7-095e68713ac5'
+        'x-zp-page-request-id': '',
+        'x-zp-client-id': ''
     }
 
     url_search = 'https://fe-api.zhaopin.com/c/i/sou?' + urlencode(params)
